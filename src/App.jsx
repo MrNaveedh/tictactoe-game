@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { calculateWinner } from './winnerLogic';
 import Status from './components/Status';
 import History from './components/History';
+
+const NEW_GAME = [
+  {
+    square: Array(9).fill(null),
+    isNext: true,
+  },
+];
 function App() {
-  const [history, setHistory] = useState([
-    {
-      square: Array(9).fill(null),
-      isNext: true,
-    },
-  ]);
+  const [history, setHistory] = useState(NEW_GAME);
   const [currentMove, setCurrentMove] = useState(0);
   const gamingBoard = history[currentMove];
   const winner = calculateWinner(gamingBoard.square);
@@ -48,10 +50,21 @@ function App() {
   const moveTo = currentIndex => {
     setCurrentMove(currentIndex);
   };
+  const reset = currentIndex => {
+    setCurrentMove(currentIndex);
+    setHistory(() => NEW_GAME);
+  };
   return (
     <div className="app">
       <Status winner={winner} gamingBoard={gamingBoard} />
       <Board square={gamingBoard.square} handleBtnEvent={handleBtnEvent} />
+      <button
+        className={`btn-reset ${winner ? 'active' : ''}`}
+        type="button"
+        onClick={() => reset(0)}
+      >
+        Start New Game
+      </button>
       <h3>Current Game History</h3>
       <History history={history} currentMove={currentMove} moveTo={moveTo} />
     </div>
