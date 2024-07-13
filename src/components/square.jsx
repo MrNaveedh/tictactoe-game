@@ -1,8 +1,14 @@
 import PropTypes from 'prop-types';
 
-const Square = ({ value, onClick }) => {
+const Square = ({ value, onClick, isWinningCombination }) => {
+  const playerColor = value == 'X' ? 'text-green' : 'text-orange';
+  const winningColor = isWinningCombination ? 'winning' : '';
   return (
-    <button type="button" className="square" onClick={onClick}>
+    <button
+      type="button"
+      className={`square ${playerColor} ${winningColor}`}
+      onClick={onClick}
+    >
       {value}
     </button>
   );
