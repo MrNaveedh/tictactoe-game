@@ -56,6 +56,11 @@ function App() {
   };
   return (
     <div className="app">
+      <h1>
+        <span style={{ color: '#FF4500' }}>Tic</span>
+        <span style={{ color: '#00FFFF' }}>Tac</span>
+        <span style={{ color: '#FF4500' }}>Toe</span>
+      </h1>
       <Status winner={winner} gamingBoard={gamingBoard} />
       <Board
         square={gamingBoard.square}
